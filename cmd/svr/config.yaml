@@ -1,0 +1,10 @@
+Env: "local"
+Port: "6080"
+AppName: "go-scraper"
+ClientConfig:
+  Timeout: 15
+  IdleConnTimeout: 30
+  MaxIdleConsPerHost: 1
+  MaxConsPerHost: 1
+DatabaseConfigs:
+ServiceConfigs:
