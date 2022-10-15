@@ -45,18 +45,18 @@ func (s Service) ScrapeData(ctx context.Context, scrapeUrl string) (dataList []m
 
 	subCollector.OnHTML("main.container", func(h *colly.HTMLElement) {
 		info := h.DOM
-		//url, _ := info.Find("a.track-visit-website").Attr("href")
+		url, _ := info.Find("a.track-visit-website").Attr("href")
 		data := models.Data{
-			Name: info.Find("article.business-card").Find("h1.dockable").Text(),
-			//Ratings:       info.Find("span.bbb-rating extra-rating").Text(),
-			//Phone:         info.Find("div.phones").Text(),
-			//StreetAddress: info.Find("div.street-address").Text(),
-			//Locality:      info.Find("div.locality").Text(),
-			//URL:           url,
+			Name:          info.Find("article.business-card").Find("h1.dockable").Text(),
+			Ratings:       info.Find("span.bbb-rating extra-rating").Text(),
+			Phone:         info.Find("div.phones").Text(),
+			StreetAddress: info.Find("div.street-address").Text(),
+			Locality:      info.Find("div.locality").Text(),
+			URL:           url,
 		}
-		//h.ForEach("div.categories a", func(i int, he1 *colly.HTMLElement) {
-		//	data.Categories = append(data.Categories, he1.Text)
-		//})
+		h.ForEach("div.categories a", func(i int, he1 *colly.HTMLElement) {
+			data.Categories = append(data.Categories, he1.Text)
+		})
 
 		dataList = append(dataList, data)
 	})
@@ -64,16 +64,16 @@ func (s Service) ScrapeData(ctx context.Context, scrapeUrl string) (dataList []m
 		return
 	}
 
-	//s.Collector.OnHTML("div.pagination a.next", func(h *colly.HTMLElement) {
-	//	pageLink := h.Request.AbsoluteURL(h.Attr("href"))
-	//
-	//	if pageLink != "" {
-	//		err = s.Collector.Visit(pageLink)
-	//		if err != nil {
-	//			return
-	//		}
-	//	}
-	//})
+	s.Collector.OnHTML("div.pagination a.next", func(h *colly.HTMLElement) {
+		pageLink := h.Request.AbsoluteURL(h.Attr("href"))
+
+		if pageLink != "" {
+			err = s.Collector.Visit(pageLink)
+			if err != nil {
+				return
+			}
+		}
+	})
 
 	if err != nil {
 		return nil, err

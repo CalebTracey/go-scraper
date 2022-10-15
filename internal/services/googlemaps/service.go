@@ -23,6 +23,9 @@ func InitializeService(config *config.Config) (*Service, error) {
 		return nil, err
 	}
 	client, err := maps.NewClient(maps.WithAPIKey(os.Getenv(geoCodingSvc.ApiKeyEnvironmentVariable.Value)))
+	if err != nil {
+		return nil, err
+	}
 	return &Service{
 		Client: client,
 	}, nil

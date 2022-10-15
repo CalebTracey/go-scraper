@@ -132,6 +132,9 @@ func (c *CollyScraper) Init() (*colly.Collector, error) {
 	extensions.Referer(c.Collector)
 
 	proxySwitcher, err := proxy.RoundRobinProxySwitcher(proxy1, proxy2, proxy3)
+	if err != nil {
+		return nil, err
+	}
 	c.Collector.SetProxyFunc(proxySwitcher)
 	return c.Collector, nil
 }

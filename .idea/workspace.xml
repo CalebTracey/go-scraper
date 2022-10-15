@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="29a3cc24-e94f-4ff8-ba36-f6c18daa5079" name="Changes" comment="Updated parsing to use unique urls for scraping">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-    </list>
+    <list default="true" id="29a3cc24-e94f-4ff8-ba36-f6c18daa5079" name="Changes" comment="Updated Dockerfile to use .env file" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -122,7 +119,7 @@
       <option name="presentableId" value="Default" />
       <updated>1665764170127</updated>
       <workItem from="1665764171860" duration="33238000" />
-      <workItem from="1665798905701" duration="2563000" />
+      <workItem from="1665798905701" duration="2993000" />
     </task>
     <task id="LOCAL-00001" summary="Added additional colly config + docker">
       <created>1665790488709</created>
@@ -145,7 +142,14 @@
       <option name="project" value="LOCAL" />
       <updated>1665801150536</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Updated Dockerfile to use .env file">
+      <created>1665801586180</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1665801586180</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -179,7 +183,8 @@
     <MESSAGE value="Added additional colly config + docker" />
     <MESSAGE value="Added google geocoding for addresses" />
     <MESSAGE value="Updated parsing to use unique urls for scraping" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated parsing to use unique urls for scraping" />
+    <MESSAGE value="Updated Dockerfile to use .env file" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated Dockerfile to use .env file" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
