@@ -103,24 +103,19 @@ func (c *CollyScraper) Init() (*colly.Collector, error) {
 		ExpectContinueTimeout: time.Duration(c.TimeoutSeconds) * time.Second,
 		TLSClientConfig:       &tls.Config{InsecureSkipVerify: true},
 	}
-
 	c.Collector = colly.NewCollector(
 		colly.Async(true),
 		colly.MaxDepth(2),
 	)
-
 	err := c.Collector.Limit(&colly.LimitRule{DomainGlob: "*", RandomDelay: 1 * time.Second, Parallelism: 6})
-
 	if err != nil {
 		return nil, err
 	}
 	c.Collector.UserAgent = c.UserAgent
 	c.Collector.WithTransport(c.Transport)
-
 	c.Collector.OnRequest(func(r *colly.Request) {
 		log.Println("Visiting", r.URL)
 	})
-
 	c.Collector.OnResponse(func(r *colly.Response) {
 		log.Println("response received", r.StatusCode)
 		//p.StatusCode = r.StatusCode
@@ -129,11 +124,9 @@ func (c *CollyScraper) Init() (*colly.Collector, error) {
 		log.Println("error:", r.StatusCode, err)
 		//p.StatusCode = r.StatusCode
 	})
-
 	setResp := func(r *http.Response) {
 		c.Response = r
 	}
-
 	c.Collector.WithTransport(NewGoWapTransport(c.Transport, setResp))
 
 	extensions.Referer(c.Collector)
