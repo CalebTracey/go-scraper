@@ -7,14 +7,14 @@ import (
 )
 
 type ServiceI interface {
-	ScrapeData(ctx context.Context, req models.ScrapeRequest) (dataList []models.Data, err error)
+	ScrapeData(ctx context.Context, scrapeUrl string) (dataList []models.Data, err error)
 }
 
 type Service struct {
 	Collector *colly.Collector
 }
 
-func NewService(config *Config) (Service, error) {
+func InitializeService(config *Config) (Service, error) {
 	s := &CollyScraper{
 		TimeoutSeconds:        config.TimeoutSeconds,
 		LoadingTimeoutSeconds: config.LoadingTimeoutSeconds,
@@ -27,16 +27,17 @@ func NewService(config *Config) (Service, error) {
 	return Service{Collector: collector}, nil
 }
 
-func (s Service) ScrapeData(ctx context.Context, req models.ScrapeRequest) (dataList []models.Data, err error) {
-	scrapeUrl := buildScrapeUrl(req)
+func (s Service) ScrapeData(ctx context.Context, scrapeUrl string) (dataList []models.Data, err error) {
 	s.Collector.OnHTML("div[class=info]", func(h *colly.HTMLElement) {
+		info := h.DOM
+		url, _ := info.Find("a.track-visit-website").Attr("href")
 		data := models.Data{
-			Name:          h.ChildText("a.business-name"),
-			Ratings:       h.ChildText("span.bbb-rating extra-rating"),
-			Phone:         h.ChildText("div.phones"),
-			StreetAddress: h.ChildText("div.street-address"),
-			Locality:      h.ChildText("div.locality"),
-			URL:           h.ChildAttr("a.track-visit-website", "href"),
+			Name:          info.Find("a.business-name").Text(),
+			Ratings:       info.Find("span.bbb-rating extra-rating").Text(),
+			Phone:         info.Find("div.phones").Text(),
+			StreetAddress: info.Find("div.street-address").Text(),
+			Locality:      info.Find("div.locality").Text(),
+			URL:           url,
 		}
 		h.ForEach("div.categories a", func(i int, he *colly.HTMLElement) {
 			data.Categories = append(data.Categories, he.Text)
@@ -45,16 +46,16 @@ func (s Service) ScrapeData(ctx context.Context, req models.ScrapeRequest) (data
 		dataList = append(dataList, data)
 	})
 
-	s.Collector.OnHTML("div.pagination a.next", func(h *colly.HTMLElement) {
-		pageLink := h.Request.AbsoluteURL(h.Attr("href"))
-
-		if pageLink != "" {
-			err = s.Collector.Visit(pageLink)
-			if err != nil {
-				return
-			}
-		}
-	})
+	//s.Collector.OnHTML("div.pagination a.next", func(h *colly.HTMLElement) {
+	//	pageLink := h.Request.AbsoluteURL(h.Attr("href"))
+	//
+	//	if pageLink != "" {
+	//		err = s.Collector.Visit(pageLink)
+	//		if err != nil {
+	//			return
+	//		}
+	//	}
+	//})
 
 	if err != nil {
 		return nil, err

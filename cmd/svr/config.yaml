@@ -8,3 +8,5 @@ ClientConfig:
   MaxConsPerHost: 1
 DatabaseConfigs:
 ServiceConfigs:
+  - Name: "GEOCODING"
+    ApiKeyEnvironmentVariable: "GEOCODING_API_KEY"

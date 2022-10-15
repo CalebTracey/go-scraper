@@ -6,6 +6,7 @@ import (
 	"github.com/calebtracey/go-scraper/internal/facade"
 	"github.com/calebtracey/go-scraper/internal/routes"
 	"github.com/calebtracey/go-scraper/internal/services"
+	"github.com/joho/godotenv"
 	"github.com/rs/cors"
 	log "github.com/sirupsen/logrus"
 )
@@ -18,7 +19,10 @@ const Port = "6080"
 
 func main() {
 	defer panicQuit()
-
+	err := godotenv.Load()
+	if err != nil {
+		log.Panicln(err)
+	}
 	appConfig := config.NewFromFile(configPath)
 	service, err := facade.NewService(appConfig)
 	if err != nil {

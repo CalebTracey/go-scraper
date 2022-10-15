@@ -143,7 +143,7 @@ func (c *CollyScraper) Init() (*colly.Collector, error) {
 	return c.Collector, nil
 }
 
-func buildScrapeUrl(req models.ScrapeRequest) string {
+func BuildScrapeUrl(req models.ScrapeRequest) string {
 	var sb strings.Builder
 
 	sb.WriteString(baseUrlSearch)

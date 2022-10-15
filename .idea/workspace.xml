@@ -4,26 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="29a3cc24-e94f-4ff8-ba36-f6c18daa5079" name="Changes" comment="Basic facade setup for web scraper API">
-      <change afterPath="$PROJECT_DIR$/.idea/git_toolbox_prj.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmd/svr/config.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmd/svr/main.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/go-scraper.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/facade/facade.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/models/common.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/models/request.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/models/response.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/routes/handler.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/services/scrape/colly.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/services/scrape/service.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/services/server.go" afterDir="false" />
+    <list default="true" id="29a3cc24-e94f-4ff8-ba36-f6c18daa5079" name="Changes" comment="Added additional colly config + docker">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/services/googlemaps/service.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/svr/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/svr/config.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/svr/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/svr/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/facade/facade.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/facade/facade.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/models/common.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/models/common.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/services/scrape/colly.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/services/scrape/colly.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/services/scrape/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/services/scrape/service.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,12 +65,13 @@
       <recent name="$PROJECT_DIR$/cmd/svr" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/cmd/svr" />
       <recent name="$PROJECT_DIR$/internal/models" />
       <recent name="$PROJECT_DIR$/internal/services" />
       <recent name="$PROJECT_DIR$/internal" />
     </key>
   </component>
-  <component name="RunManager" selected="Docker.docker-compose.yml: Compose Deployment">
+  <component name="RunManager" selected="Go Build.go build main.go">
     <configuration name="go build main.go" type="GoApplicationRunConfiguration" factoryName="Go Application" nameIsGenerated="true">
       <module name="go-scraper" />
       <working_directory value="$PROJECT_DIR$/cmd/svr" />
@@ -134,8 +127,16 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1665764170127</updated>
-      <workItem from="1665764171860" duration="25731000" />
+      <workItem from="1665764171860" duration="32866000" />
     </task>
+    <task id="LOCAL-00001" summary="Added additional colly config + docker">
+      <created>1665790488709</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1665790488709</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -146,7 +147,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -154,7 +167,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Basic facade setup for web scraper API" />
-    <option name="LAST_COMMIT_MESSAGE" value="Basic facade setup for web scraper API" />
+    <MESSAGE value="Added additional colly config + docker" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added additional colly config + docker" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
