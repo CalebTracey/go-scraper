@@ -16,5 +16,6 @@ FROM alpine:3.15
 EXPOSE 6080
 COPY --from=builder /app/cmd/svr/app .
 COPY --from=builder /app/cmd/svr/config.yaml .
+COPY --from=builder /app/cmd/svr/.env .
 
 CMD ["./app"]
