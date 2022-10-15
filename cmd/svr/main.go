@@ -30,7 +30,7 @@ func main() {
 	}
 
 	handler := routes.Handler{
-		Service: &service,
+		Service: service,
 	}
 
 	router := handler.InitializeRoutes()

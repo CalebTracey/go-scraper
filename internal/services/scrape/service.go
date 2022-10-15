@@ -4,7 +4,7 @@ import (
 	"context"
 	"github.com/calebtracey/go-scraper/internal/models"
 	"github.com/gocolly/colly"
-	"strings"
+	log "github.com/sirupsen/logrus"
 )
 
 type ServiceI interface {
@@ -15,7 +15,7 @@ type Service struct {
 	Collector *colly.Collector
 }
 
-func InitializeService(config *Config) (Service, error) {
+func InitializeService(config *Config) (*Service, error) {
 	s := &CollyScraper{
 		TimeoutSeconds:        config.TimeoutSeconds,
 		LoadingTimeoutSeconds: config.LoadingTimeoutSeconds,
@@ -23,21 +23,22 @@ func InitializeService(config *Config) (Service, error) {
 	}
 	collector, err := s.Init()
 	if err != nil {
-		return Service{}, err
+		return &Service{}, err
 	}
-	return Service{Collector: collector}, nil
+	return &Service{Collector: collector}, nil
 }
 
-func (s Service) ScrapeData(ctx context.Context, scrapeUrl string) (dataList []models.Data, err error) {
+func (s *Service) ScrapeData(ctx context.Context, scrapeUrl string) (dataList []models.Data, err error) {
 	collector := s.Collector
 	subCollector := s.Collector
 	collector.OnHTML("div.scrollable-pane", func(h *colly.HTMLElement) {
 		h.ForEach("a.business-name", func(i int, he *colly.HTMLElement) {
-			url, found := he.DOM.Attr("href")
-			if found {
-				err = subCollector.Visit(strings.Join([]string{baseUrl, url}, ""))
+			//url, found := he.DOM.Attr("href")
+			url := he.Request.AbsoluteURL(he.Attr("href"))
+			if url != "" {
+				err = subCollector.Visit(url)
 				if err != nil {
-					return
+					log.Error(err)
 				}
 			}
 		})
@@ -45,44 +46,47 @@ func (s Service) ScrapeData(ctx context.Context, scrapeUrl string) (dataList []m
 
 	subCollector.OnHTML("main.container", func(h *colly.HTMLElement) {
 		info := h.DOM
-		url, _ := info.Find("a.track-visit-website").Attr("href")
+		//url, _ := info.Find("section.details-card").Find("p.website").Attr("href")
+		url := h.Request.AbsoluteURL(info.Find("section.details-card").Find("p.website").AttrOr("href", ""))
 		data := models.Data{
-			Name:          info.Find("article.business-card").Find("h1.dockable").Text(),
-			Ratings:       info.Find("span.bbb-rating extra-rating").Text(),
-			Phone:         info.Find("div.phones").Text(),
-			StreetAddress: info.Find("div.street-address").Text(),
-			Locality:      info.Find("div.locality").Text(),
-			URL:           url,
+			Name: info.Find("article.business-card").Find("h1.dockable").Text(),
+			//TODO update these for new url
+			//Ratings:       info.Find("span.bbb-rating extra-rating").Text(),
+			Phone:   info.Find("section.details-card").Find("p.phone").Text(),
+			Address: info.Find("section.details-card").Find("p").Text(),
+			URL:     url,
 		}
-		h.ForEach("div.categories a", func(i int, he1 *colly.HTMLElement) {
-			data.Categories = append(data.Categories, he1.Text)
+		//TODO update for new url
+		h.ForEach("div.categories a", func(i int, he *colly.HTMLElement) {
+			data.Categories = append(data.Categories, he.Text)
 		})
 
 		dataList = append(dataList, data)
 	})
 	if err != nil {
-		return
+		log.Error(err)
 	}
 
-	s.Collector.OnHTML("div.pagination a.next", func(h *colly.HTMLElement) {
+	collector.OnHTML("div.pagination a.next", func(h *colly.HTMLElement) {
 		pageLink := h.Request.AbsoluteURL(h.Attr("href"))
 
 		if pageLink != "" {
-			err = s.Collector.Visit(pageLink)
+			err = collector.Visit(pageLink)
 			if err != nil {
-				return
+				log.Error(err)
 			}
 		}
 	})
 
-	if err != nil {
-		return nil, err
-	}
+	//if err != nil {
+	//	return nil, err
+	//}
 	err = collector.Visit(scrapeUrl)
 	if err != nil {
 		return nil, err
 	}
 
 	collector.Wait()
+	subCollector.Wait()
 	return dataList, nil
 }

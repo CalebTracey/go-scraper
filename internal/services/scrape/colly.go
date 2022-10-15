@@ -5,7 +5,6 @@ import (
 	"github.com/calebtracey/go-scraper/internal/models"
 	"github.com/gocolly/colly"
 	"github.com/gocolly/colly/extensions"
-	"github.com/gocolly/colly/proxy"
 	log "github.com/sirupsen/logrus"
 	"go.zoe.im/surferua"
 	"net"
@@ -23,9 +22,9 @@ const (
 )
 
 const (
-	proxy1 = "184.181.217.204:4145"
-	proxy2 = "98.185.94.94:4145"
-	proxy3 = "184.178.172.18:15280"
+	proxy1 = "socks5://184.181.217.204:4145"
+	proxy2 = "socks5://98.185.94.94:4145"
+	proxy3 = "socks5://184.178.172.18:15280"
 )
 
 type ScraperI interface {
@@ -63,7 +62,7 @@ func NewConfig() *Config {
 		JSON:                   true,
 		MaxDepth:               0,
 		visitedLinks:           0,
-		MaxVisitedLinks:        50,
+		MaxVisitedLinks:        500,
 		MsDelayBetweenRequests: 10,
 		UserAgent:              surferua.New().Desktop().Chrome().String(),
 	}
@@ -95,10 +94,11 @@ func (c *CollyScraper) Init() (*colly.Collector, error) {
 	log.Infoln("Colly initialization")
 	c.Transport = &http.Transport{
 		DialContext: (&net.Dialer{
-			Timeout: time.Second * time.Duration(c.TimeoutSeconds),
+			Timeout:   time.Second * time.Duration(c.TimeoutSeconds),
+			KeepAlive: 30 * time.Second,
 		}).DialContext,
 		MaxIdleConns:          100,
-		IdleConnTimeout:       90 * time.Second,
+		IdleConnTimeout:       600 * time.Second,
 		TLSHandshakeTimeout:   2 * time.Second,
 		ExpectContinueTimeout: time.Duration(c.TimeoutSeconds) * time.Second,
 		TLSClientConfig:       &tls.Config{InsecureSkipVerify: true},
@@ -131,11 +131,11 @@ func (c *CollyScraper) Init() (*colly.Collector, error) {
 
 	extensions.Referer(c.Collector)
 
-	proxySwitcher, err := proxy.RoundRobinProxySwitcher(proxy1, proxy2, proxy3)
-	if err != nil {
-		return nil, err
-	}
-	c.Collector.SetProxyFunc(proxySwitcher)
+	//proxySwitcher, err := proxy.RoundRobinProxySwitcher(proxy1, proxy2, proxy3)
+	//if err != nil {
+	//	return nil, err
+	//}
+	//c.Collector.SetProxyFunc(proxySwitcher)
 	return c.Collector, nil
 }
 
