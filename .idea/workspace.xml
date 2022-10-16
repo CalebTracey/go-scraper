@@ -4,8 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="29a3cc24-e94f-4ff8-ba36-f6c18daa5079" name="Changes" comment="scraper logic work">
+    <list default="true" id="29a3cc24-e94f-4ff8-ba36-f6c18daa5079" name="Changes" comment="Added search request validation">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/facade/facade.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/facade/facade.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/models/common.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/models/common.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/routes/handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/routes/handler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/services/scrape/colly.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/services/scrape/colly.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/services/scrape/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/services/scrape/service.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -149,7 +154,8 @@
       <option name="presentableId" value="Default" />
       <updated>1665764170127</updated>
       <workItem from="1665764171860" duration="33238000" />
-      <workItem from="1665798905701" duration="8392000" />
+      <workItem from="1665798905701" duration="8575000" />
+      <workItem from="1665941591611" duration="3973000" />
     </task>
     <task id="LOCAL-00001" summary="Added additional colly config + docker">
       <created>1665790488709</created>
@@ -193,7 +199,14 @@
       <option name="project" value="LOCAL" />
       <updated>1665806910611</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Added search request validation">
+      <created>1665807458722</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1665807458722</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -230,7 +243,8 @@
     <MESSAGE value="Updated Dockerfile to use .env file" />
     <MESSAGE value="Code cleanup" />
     <MESSAGE value="scraper logic work" />
-    <option name="LAST_COMMIT_MESSAGE" value="scraper logic work" />
+    <MESSAGE value="Added search request validation" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added search request validation" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>

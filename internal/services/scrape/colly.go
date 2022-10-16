@@ -62,7 +62,7 @@ func NewConfig() *Config {
 		JSON:                   true,
 		MaxDepth:               0,
 		visitedLinks:           0,
-		MaxVisitedLinks:        500,
+		MaxVisitedLinks:        100,
 		MsDelayBetweenRequests: 10,
 		UserAgent:              surferua.New().Desktop().Chrome().String(),
 	}
@@ -95,10 +95,10 @@ func (c *CollyScraper) Init() (*colly.Collector, error) {
 	c.Transport = &http.Transport{
 		DialContext: (&net.Dialer{
 			Timeout:   time.Second * time.Duration(c.TimeoutSeconds),
-			KeepAlive: 30 * time.Second,
+			KeepAlive: 180 * time.Second,
 		}).DialContext,
 		MaxIdleConns:          100,
-		IdleConnTimeout:       600 * time.Second,
+		IdleConnTimeout:       90 * time.Second,
 		TLSHandshakeTimeout:   2 * time.Second,
 		ExpectContinueTimeout: time.Duration(c.TimeoutSeconds) * time.Second,
 		TLSClientConfig:       &tls.Config{InsecureSkipVerify: true},
@@ -118,39 +118,26 @@ func (c *CollyScraper) Init() (*colly.Collector, error) {
 	})
 	c.Collector.OnResponse(func(r *colly.Response) {
 		log.Println("response received", r.StatusCode)
-		//p.StatusCode = r.StatusCode
 	})
 	c.Collector.OnError(func(r *colly.Response, err error) {
 		log.Println("error:", r.StatusCode, err)
-		//p.StatusCode = r.StatusCode
 	})
 	setResp := func(r *http.Response) {
 		c.Response = r
 	}
-	c.Collector.WithTransport(NewGoWapTransport(c.Transport, setResp))
-
-	extensions.Referer(c.Collector)
-
 	//proxySwitcher, err := proxy.RoundRobinProxySwitcher(proxy1, proxy2, proxy3)
 	//if err != nil {
 	//	return nil, err
 	//}
 	//c.Collector.SetProxyFunc(proxySwitcher)
+	c.Collector.WithTransport(NewGoWapTransport(c.Transport, setResp))
+	extensions.Referer(c.Collector)
+
 	return c.Collector, nil
 }
 
 func BuildScrapeUrl(req models.ScrapeRequest) string {
-	var sb strings.Builder
-
-	sb.WriteString(baseUrlSearch)
-	sb.WriteString(searchTermsField)
 	terms := strings.ReplaceAll(strings.TrimSpace(req.Terms), " ", "+")
-	sb.WriteString(terms)
-	sb.WriteString(geoLocationTermsField)
 	city := strings.ReplaceAll(strings.TrimSpace(req.City), " ", "+")
-	sb.WriteString(city)
-	sb.WriteString(urlComma)
-	sb.WriteString(strings.TrimSpace(req.State))
-
-	return sb.String()
+	return strings.Join([]string{baseUrlSearch, searchTermsField, terms, geoLocationTermsField, city, urlComma, strings.TrimSpace(req.State)}, "")
 }

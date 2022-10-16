@@ -11,6 +11,7 @@ import (
 	"golang.org/x/sync/errgroup"
 	"net/http"
 	"strconv"
+	"strings"
 )
 
 type ServiceI interface {
@@ -52,20 +53,19 @@ func (s *Service) GetData(ctx context.Context, req models.ScrapeRequest) (res mo
 	}
 
 	scrapeUrl := scrape.BuildScrapeUrl(req)
-	dataList, err := s.ScrapeService.ScrapeData(ctx, scrapeUrl)
-	if err != nil {
-		m.ErrorLog = errorLogs([]error{err}, "Failed to scrape data", http.StatusInternalServerError)
+	dataList, scrapeErrs := s.ScrapeService.ScrapeCommonData(scrapeUrl)
+	if len(errs) > 0 {
+		m.ErrorLog = errorLogs(scrapeErrs, "Failed to scrape data", http.StatusInternalServerError)
 		m.Status = strconv.Itoa(http.StatusInternalServerError)
 		res.Message = m
 		return res
 	}
-
 	for idx := range dataList {
 		i := idx
 		g.Go(func() error {
-			if dataList[i].Address != "" {
-				log.Println(dataList[i].Address)
-				loc, locErr := s.GeocodeService.GeocodeLocationAddress(ctx, dataList[i].Address)
+			if dataList[i].StreetAddress != "" && dataList[i].Locality != "" {
+				adr := strings.Join([]string{dataList[i].StreetAddress, dataList[i].Locality}, " ")
+				loc, locErr := s.GeocodeService.GeocodeLocationAddress(ctx, adr)
 				if locErr != nil {
 					return locErr
 				}
@@ -81,7 +81,6 @@ func (s *Service) GetData(ctx context.Context, req models.ScrapeRequest) (res mo
 		m.Status = strconv.Itoa(http.StatusInternalServerError)
 		res.Message = m
 	}
-
 	res.Data = dataList
 	m.Status = strconv.Itoa(http.StatusOK)
 	m.Count = len(res.Data)
