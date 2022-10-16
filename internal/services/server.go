@@ -35,9 +35,9 @@ func ListenAndServe(addr string, handler http.Handler) error {
 		killSignal := <-signals
 		switch killSignal {
 		case os.Interrupt:
-			log.Infoln("SIGINT recieved (Control-C ?)")
+			log.Infoln("SIGINT received (Control-C ?)")
 		case syscall.SIGTERM:
-			log.Infoln("SIGTERM recieved (Heroku shutdown?)")
+			log.Infoln("SIGTERM received (Heroku shutdown?)")
 		case nil:
 			return
 		}
