@@ -10,7 +10,8 @@ Google geocode finds the longitude and latitude with scraped address.
   * <i>Search terms - "terms"*</i>
   * <i>"city"*</i>
   * <i>"state"*</i>
-  * Required
+  
+ *Required
 <br/>
 ### Run configuration:
 <br/>
