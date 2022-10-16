@@ -2,6 +2,7 @@ package facade
 
 import (
 	"context"
+	"fmt"
 	config "github.com/calebtracey/config-yaml"
 	"github.com/calebtracey/go-scraper/internal/models"
 	"github.com/calebtracey/go-scraper/internal/services/googlemaps"
@@ -22,45 +23,55 @@ type Service struct {
 	GeocodeService googlemaps.ServiceI
 }
 
-func NewService(appConfig *config.Config) (Service, error) {
+func NewService(appConfig *config.Config) (*Service, error) {
 	scrapeConfig := scrape.NewConfig()
 	scrapeSvc, err := scrape.InitializeService(scrapeConfig)
 	if err != nil {
-		return Service{}, err
+		return &Service{}, err
 	}
 	geocodeSvc, err := googlemaps.InitializeService(appConfig)
 	if err != nil {
-		return Service{}, err
+		return &Service{}, err
 	}
 
-	return Service{
+	return &Service{
 		ScrapeService:  scrapeSvc,
 		GeocodeService: geocodeSvc,
 	}, nil
 }
 
-func (s Service) GetData(ctx context.Context, req models.ScrapeRequest) (res models.ScrapeResponse) {
+func (s *Service) GetData(ctx context.Context, req models.ScrapeRequest) (res models.ScrapeResponse) {
 	var m models.Message
 	var g errgroup.Group
-	scrapeUrl := scrape.BuildScrapeUrl(req)
-	dataList, err := s.ScrapeService.ScrapeData(ctx, scrapeUrl)
-	if err != nil {
-		m.ErrorLog = errorLogs([]error{err}, "Failed to scrape data", http.StatusInternalServerError)
-		m.Status = strconv.Itoa(http.StatusInternalServerError)
+
+	errs := validateRequest(req)
+	if len(errs) > 0 {
+		m.ErrorLog = errorLogs(errs, "Request error", http.StatusBadRequest)
+		m.Status = strconv.Itoa(http.StatusBadRequest)
 		res.Message = m
 		return res
 	}
 
+	scrapeUrl := scrape.BuildScrapeUrl(req)
+	dataList, scrapeErrs := s.ScrapeService.ScrapeCommonData(scrapeUrl)
+	if len(errs) > 0 {
+		m.ErrorLog = errorLogs(scrapeErrs, "Failed to scrape data", http.StatusInternalServerError)
+		m.Status = strconv.Itoa(http.StatusInternalServerError)
+		res.Message = m
+		return res
+	}
 	for idx := range dataList {
 		i := idx
 		g.Go(func() error {
-			address := strings.Join([]string{dataList[i].StreetAddress, dataList[i].Locality}, " ")
-			loc, locErr := s.GeocodeService.GeocodeLocationAddress(ctx, address)
-			if locErr != nil {
-				return locErr
+			if dataList[i].StreetAddress != "" && dataList[i].Locality != "" {
+				adr := strings.Join([]string{dataList[i].StreetAddress, dataList[i].Locality}, " ")
+				loc, locErr := s.GeocodeService.GeocodeLocationAddress(ctx, adr)
+				if locErr != nil {
+					return locErr
+				}
+				dataList[i].Location.Lat = loc.Lat
+				dataList[i].Location.Lng = loc.Lng
 			}
-			dataList[i].Location.Lat = loc.Lat
-			dataList[i].Location.Lng = loc.Lng
 			return nil
 		})
 	}
@@ -69,15 +80,28 @@ func (s Service) GetData(ctx context.Context, req models.ScrapeRequest) (res mod
 		m.ErrorLog = errorLogs([]error{gErr}, "Failed to get geocode location", http.StatusInternalServerError)
 		m.Status = strconv.Itoa(http.StatusInternalServerError)
 		res.Message = m
-		return res
 	}
-
 	res.Data = dataList
 	m.Status = strconv.Itoa(http.StatusOK)
 	m.Count = len(res.Data)
 	res.Message = m
 
 	return res
+}
+
+func validateRequest(req models.ScrapeRequest) []error {
+	var errs []error
+	if req.Terms == "" {
+		errs = append(errs, fmt.Errorf("search terms required"))
+	}
+	if req.City == "" {
+		errs = append(errs, fmt.Errorf("city required"))
+	}
+	if req.State == "" {
+		errs = append(errs, fmt.Errorf("state required"))
+	}
+
+	return errs
 }
 
 func errorLogs(errors []error, rootCause string, status int) []models.ErrorLog {

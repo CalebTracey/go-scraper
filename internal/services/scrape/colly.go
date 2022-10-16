@@ -5,7 +5,6 @@ import (
 	"github.com/calebtracey/go-scraper/internal/models"
 	"github.com/gocolly/colly"
 	"github.com/gocolly/colly/extensions"
-	"github.com/gocolly/colly/proxy"
 	log "github.com/sirupsen/logrus"
 	"go.zoe.im/surferua"
 	"net"
@@ -23,9 +22,9 @@ const (
 )
 
 const (
-	proxy1 = "184.181.217.204:4145"
-	proxy2 = "98.185.94.94:4145"
-	proxy3 = "184.178.172.18:15280"
+	proxy1 = "socks5://184.181.217.204:4145"
+	proxy2 = "socks5://98.185.94.94:4145"
+	proxy3 = "socks5://184.178.172.18:15280"
 )
 
 type ScraperI interface {
@@ -63,7 +62,7 @@ func NewConfig() *Config {
 		JSON:                   true,
 		MaxDepth:               0,
 		visitedLinks:           0,
-		MaxVisitedLinks:        50,
+		MaxVisitedLinks:        100,
 		MsDelayBetweenRequests: 10,
 		UserAgent:              surferua.New().Desktop().Chrome().String(),
 	}
@@ -95,7 +94,8 @@ func (c *CollyScraper) Init() (*colly.Collector, error) {
 	log.Infoln("Colly initialization")
 	c.Transport = &http.Transport{
 		DialContext: (&net.Dialer{
-			Timeout: time.Second * time.Duration(c.TimeoutSeconds),
+			Timeout:   time.Second * time.Duration(c.TimeoutSeconds),
+			KeepAlive: 180 * time.Second,
 		}).DialContext,
 		MaxIdleConns:          100,
 		IdleConnTimeout:       90 * time.Second,
@@ -118,39 +118,26 @@ func (c *CollyScraper) Init() (*colly.Collector, error) {
 	})
 	c.Collector.OnResponse(func(r *colly.Response) {
 		log.Println("response received", r.StatusCode)
-		//p.StatusCode = r.StatusCode
 	})
 	c.Collector.OnError(func(r *colly.Response, err error) {
 		log.Println("error:", r.StatusCode, err)
-		//p.StatusCode = r.StatusCode
 	})
 	setResp := func(r *http.Response) {
 		c.Response = r
 	}
+	//proxySwitcher, err := proxy.RoundRobinProxySwitcher(proxy1, proxy2, proxy3)
+	//if err != nil {
+	//	return nil, err
+	//}
+	//c.Collector.SetProxyFunc(proxySwitcher)
 	c.Collector.WithTransport(NewGoWapTransport(c.Transport, setResp))
-
 	extensions.Referer(c.Collector)
 
-	proxySwitcher, err := proxy.RoundRobinProxySwitcher(proxy1, proxy2, proxy3)
-	if err != nil {
-		return nil, err
-	}
-	c.Collector.SetProxyFunc(proxySwitcher)
 	return c.Collector, nil
 }
 
 func BuildScrapeUrl(req models.ScrapeRequest) string {
-	var sb strings.Builder
-
-	sb.WriteString(baseUrlSearch)
-	sb.WriteString(searchTermsField)
 	terms := strings.ReplaceAll(strings.TrimSpace(req.Terms), " ", "+")
-	sb.WriteString(terms)
-	sb.WriteString(geoLocationTermsField)
 	city := strings.ReplaceAll(strings.TrimSpace(req.City), " ", "+")
-	sb.WriteString(city)
-	sb.WriteString(urlComma)
-	sb.WriteString(strings.TrimSpace(req.State))
-
-	return sb.String()
+	return strings.Join([]string{baseUrlSearch, searchTermsField, terms, geoLocationTermsField, city, urlComma, strings.TrimSpace(req.State)}, "")
 }

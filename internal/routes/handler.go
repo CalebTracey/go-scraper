@@ -29,7 +29,6 @@ func (h Handler) Scrape() http.HandlerFunc {
 		var res models.ScrapeResponse
 		var req models.ScrapeRequest
 		startTime := time.Now()
-
 		defer func() {
 			res.Message.TimeTaken = time.Since(startTime).String()
 			res, status := setScrapeResponse(res)

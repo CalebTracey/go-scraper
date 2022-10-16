@@ -4,7 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="29a3cc24-e94f-4ff8-ba36-f6c18daa5079" name="Changes" comment="Updated Dockerfile to use .env file" />
+    <list default="true" id="29a3cc24-e94f-4ff8-ba36-f6c18daa5079" name="Changes" comment="Added search request validation">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/facade/facade.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/facade/facade.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/models/common.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/models/common.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/routes/handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/routes/handler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/services/scrape/colly.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/services/scrape/colly.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/services/scrape/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/services/scrape/service.go" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -19,10 +26,38 @@
   </component>
   <component name="GOROOT" url="file:///usr/local/go/go1.19.2" />
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitToolBoxStore">
     <option name="projectConfigVersion" value="5" />
+    <option name="recentBranches">
+      <RecentBranches>
+        <option name="branchesForRepo">
+          <list>
+            <RecentBranchesForRepo>
+              <option name="branches">
+                <list>
+                  <RecentBranch>
+                    <option name="branchName" value="scraper-work" />
+                    <option name="lastUsedInstant" value="1665806876" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="main" />
+                    <option name="lastUsedInstant" value="1665806875" />
+                  </RecentBranch>
+                </list>
+              </option>
+              <option name="repositoryRootUrl" value="file://$PROJECT_DIR$" />
+            </RecentBranchesForRepo>
+          </list>
+        </option>
+      </RecentBranches>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -119,7 +154,8 @@
       <option name="presentableId" value="Default" />
       <updated>1665764170127</updated>
       <workItem from="1665764171860" duration="33238000" />
-      <workItem from="1665798905701" duration="2993000" />
+      <workItem from="1665798905701" duration="8575000" />
+      <workItem from="1665941591611" duration="3973000" />
     </task>
     <task id="LOCAL-00001" summary="Added additional colly config + docker">
       <created>1665790488709</created>
@@ -149,7 +185,28 @@
       <option name="project" value="LOCAL" />
       <updated>1665801586180</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Code cleanup">
+      <created>1665802286946</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1665802286946</updated>
+    </task>
+    <task id="LOCAL-00006" summary="scraper logic work">
+      <created>1665806910611</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1665806910611</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Added search request validation">
+      <created>1665807458722</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1665807458722</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -184,7 +241,10 @@
     <MESSAGE value="Added google geocoding for addresses" />
     <MESSAGE value="Updated parsing to use unique urls for scraping" />
     <MESSAGE value="Updated Dockerfile to use .env file" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated Dockerfile to use .env file" />
+    <MESSAGE value="Code cleanup" />
+    <MESSAGE value="scraper logic work" />
+    <MESSAGE value="Added search request validation" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added search request validation" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
