@@ -137,7 +137,23 @@ func (c *CollyScraper) Init() (*colly.Collector, error) {
 }
 
 func BuildScrapeUrl(req models.ScrapeRequest) string {
+	var sortField string
 	terms := strings.ReplaceAll(strings.TrimSpace(req.Terms), " ", "+")
 	city := strings.ReplaceAll(strings.TrimSpace(req.City), " ", "+")
-	return strings.Join([]string{baseUrlSearch, searchTermsField, terms, geoLocationTermsField, city, urlComma, strings.TrimSpace(req.State)}, "")
+	url := strings.Join([]string{baseUrlSearch, searchTermsField, terms, geoLocationTermsField, city, urlComma, strings.TrimSpace(req.State)}, "")
+	if req.Sort != "" {
+		switch req.Sort {
+		case ReqSortResultsByDistance:
+			sortField = sortResultsByDistance
+			log.Infoln("Sorting results by distance")
+		case ReqSortResultsByRating:
+			sortField = sortResultsByRating
+			log.Infoln("Sorting results by rating")
+		case ReqSortResultsByName:
+			sortField = sortResultsByName
+			log.Infoln("Sorting results by name")
+		}
+		url = strings.Join([]string{url, sortField}, "")
+	}
+	return url
 }

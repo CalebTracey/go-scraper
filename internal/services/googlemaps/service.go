@@ -9,6 +9,7 @@ import (
 	"os"
 )
 
+//go:generate mockgen -destination=mockService.go -package=googlemaps . ServiceI
 type ServiceI interface {
 	GeocodeLocationAddress(ctx context.Context, address string) (loc models.Location, err error)
 }
