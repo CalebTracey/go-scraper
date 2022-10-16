@@ -1,8 +1,8 @@
 # go-scraper
 
-Web scraper written in Go.
+Web scraper written in Go. Intended to collect business data based on location.
 
-Uses [go-colly](https://github.com/gocolly/colly) to scrape yellowpages for basic data.
+[go-colly](https://github.com/gocolly/colly) used to scrape yellowpages for basic data.
 
 Google geocode finds the longitude and latitude with scraped address. 
 
@@ -12,10 +12,10 @@ Google geocode finds the longitude and latitude with scraped address.
   * <i>"state"*</i>
   
  <i>*Required</i>
-<br/>
+
 ### Example request body:
-<img src=./docs/req-body.png />
-<br/>
+<img src=./docs/req-body.png  alt="" width="400"/>
+
 ### Run configuration:
 <br/>
-<img src=./docs/run-conf.png />
+<img src=./docs/run-conf.png  alt="" width="400"/>
