@@ -22,6 +22,7 @@ const (
 	ypAverageRating = "&&s=average_rating"
 )
 
+// sorting fields
 const (
 	ReqSortResultsByName     = "name"
 	ReqSortResultsByDistance = "distance"

@@ -43,7 +43,6 @@ func NewService(appConfig *config.Config) (*Service, error) {
 
 func (s *Service) GetData(ctx context.Context, req models.ScrapeRequest) (res models.ScrapeResponse) {
 	var m models.Message
-	var g errgroup.Group
 
 	errs := validateRequest(req)
 	if len(errs) > 0 {
@@ -63,6 +62,24 @@ func (s *Service) GetData(ctx context.Context, req models.ScrapeRequest) (res mo
 		res.Message = m
 		return res
 	}
+
+	dataList, gErr := s.getDataGeocodeLocations(ctx, dataList)
+	if gErr != nil {
+		m.ErrorLog = errorLogs([]error{gErr}, "Failed to get geocode location", http.StatusInternalServerError)
+		m.Status = strconv.Itoa(http.StatusInternalServerError)
+		res.Message = m
+	}
+	res.Data = dataList
+	m.Status = strconv.Itoa(http.StatusOK)
+	m.Count = len(res.Data)
+	res.Message = m
+
+	return res
+}
+
+func (s *Service) getDataGeocodeLocations(ctx context.Context, dataList []models.Data) ([]models.Data, error) {
+	var g errgroup.Group
+
 	for idx := range dataList {
 		i := idx
 		g.Go(func() error {
@@ -80,16 +97,9 @@ func (s *Service) GetData(ctx context.Context, req models.ScrapeRequest) (res mo
 	}
 
 	if gErr := g.Wait(); gErr != nil {
-		m.ErrorLog = errorLogs([]error{gErr}, "Failed to get geocode location", http.StatusInternalServerError)
-		m.Status = strconv.Itoa(http.StatusInternalServerError)
-		res.Message = m
+		return dataList, gErr
 	}
-	res.Data = dataList
-	m.Status = strconv.Itoa(http.StatusOK)
-	m.Count = len(res.Data)
-	res.Message = m
-
-	return res
+	return dataList, nil
 }
 
 func validateRequest(req models.ScrapeRequest) []error {
