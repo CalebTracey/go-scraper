@@ -11,7 +11,7 @@ Google geocode finds the longitude and latitude with scraped address.
   * <i>"city"*</i>
   * <i>"state"*</i>
   
- *Required
+ <i>*Required</i>
 <br/>
 ### Run configuration:
 <br/>
