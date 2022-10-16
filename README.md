@@ -6,5 +6,11 @@ Uses [go-colly](https://github.com/gocolly/colly) to scrape yellowpages for basi
 
 Google geocode finds the longitude and latitude with scraped address. 
 
-<p>Run configuration:</p>
+###<p>Current available search parameters:<p>
+  * <i>Search terms - "terms"*</i>
+  * <i>"city"*</i>
+  * <i>"state"*</i>
+  * Required
+<br/>
+###<p>Run configuration:</p>
 <img src=./docs/run-conf.png />
