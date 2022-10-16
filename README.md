@@ -13,6 +13,9 @@ Google geocode finds the longitude and latitude with scraped address.
   
  <i>*Required</i>
 <br/>
+### Example request body:
+<img src=./docs/req-body.png />
+<br/>
 ### Run configuration:
 <br/>
 <img src=./docs/run-conf.png />
