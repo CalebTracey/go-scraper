@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="29a3cc24-e94f-4ff8-ba36-f6c18daa5079" name="Changes" comment="Added mocks + sort request field">
+    <list default="true" id="29a3cc24-e94f-4ff8-ba36-f6c18daa5079" name="Changes" comment="moved geolocation facade logic to helper func">
+      <change afterPath="$PROJECT_DIR$/internal/facade/facade_test.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/services/scrape/constants.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/services/scrape/service_test.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/internal/services/scrape/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/services/scrape/service.go" afterDir="false" />
     </list>
@@ -38,6 +41,10 @@
             <RecentBranchesForRepo>
               <option name="branches">
                 <list>
+                  <RecentBranch>
+                    <option name="branchName" value="algo-work" />
+                    <option name="lastUsedInstant" value="1665954312" />
+                  </RecentBranch>
                   <RecentBranch>
                     <option name="branchName" value="scraper-work" />
                     <option name="lastUsedInstant" value="1665806876" />
@@ -96,7 +103,7 @@
       <recent name="$PROJECT_DIR$/internal" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Build.go build main.go">
+  <component name="RunManager" selected="Go Test.TestService_GetData in github.com/calebtracey/go-scraper/internal/facade">
     <configuration name="go build main.go" type="GoApplicationRunConfiguration" factoryName="Go Application" nameIsGenerated="true">
       <module name="go-scraper" />
       <working_directory value="$PROJECT_DIR$/cmd/svr" />
@@ -114,6 +121,18 @@
       <package value="github.com/calebtracey/go-scraper/cmd/svr" />
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$/cmd/svr/main.go" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TestService_GetData in github.com/calebtracey/go-scraper/internal/facade" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="go-scraper" />
+      <working_directory value="$PROJECT_DIR$/internal/facade" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="github.com/calebtracey/go-scraper/internal/facade" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestService_GetData\E$" />
       <method v="2" />
     </configuration>
     <configuration name="Dockerfile" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
@@ -136,9 +155,11 @@
       <item itemvalue="Docker.Dockerfile" />
       <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
       <item itemvalue="Go Build.go build main.go" />
+      <item itemvalue="Go Test.TestService_GetData in github.com/calebtracey/go-scraper/internal/facade" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Test.TestService_GetData in github.com/calebtracey/go-scraper/internal/facade" />
         <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
         <item itemvalue="Docker.Dockerfile" />
       </list>
@@ -155,6 +176,7 @@
       <workItem from="1665764171860" duration="33238000" />
       <workItem from="1665798905701" duration="8575000" />
       <workItem from="1665941591611" duration="3973000" />
+      <workItem from="1665953959493" duration="3080000" />
     </task>
     <task id="LOCAL-00001" summary="Added additional colly config + docker">
       <created>1665790488709</created>
@@ -233,7 +255,14 @@
       <option name="project" value="LOCAL" />
       <updated>1665952373207</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="moved geolocation facade logic to helper func">
+      <created>1665954289126</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1665954289126</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -275,7 +304,8 @@
     <MESSAGE value="added docs for ReadME" />
     <MESSAGE value="added docs + updates for README.md" />
     <MESSAGE value="Added mocks + sort request field" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added mocks + sort request field" />
+    <MESSAGE value="moved geolocation facade logic to helper func" />
+    <option name="LAST_COMMIT_MESSAGE" value="moved geolocation facade logic to helper func" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
@@ -290,5 +320,8 @@
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/go_scraper$TestService_GetData_in_github_com_calebtracey_go_scraper_internal_facade.out" NAME="TestService_GetData in github.com/calebtracey/go-scraper/internal/facade Coverage Results" MODIFIED="1665963221589" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
