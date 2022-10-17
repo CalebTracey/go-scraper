@@ -47,7 +47,6 @@ func (s *Service) GetData(ctx context.Context, req models.ScrapeRequest) (res mo
 	errs := validateRequest(req)
 	if len(errs) > 0 {
 		m.ErrorLog = errorLogs(errs, "Request error", http.StatusBadRequest)
-		m.Status = strconv.Itoa(http.StatusBadRequest)
 		res.Message = m
 		return res
 	}
@@ -58,7 +57,6 @@ func (s *Service) GetData(ctx context.Context, req models.ScrapeRequest) (res mo
 	dataList, scrapeErrs := s.ScrapeService.ScrapeCommonData(scrapeUrl)
 	if len(errs) > 0 {
 		m.ErrorLog = errorLogs(scrapeErrs, "Failed to scrape data", http.StatusInternalServerError)
-		m.Status = strconv.Itoa(http.StatusInternalServerError)
 		res.Message = m
 		return res
 	}
@@ -66,11 +64,9 @@ func (s *Service) GetData(ctx context.Context, req models.ScrapeRequest) (res mo
 	dataList, gErr := s.getDataGeocodeLocations(ctx, dataList)
 	if gErr != nil {
 		m.ErrorLog = errorLogs([]error{gErr}, "Failed to get geocode location", http.StatusInternalServerError)
-		m.Status = strconv.Itoa(http.StatusInternalServerError)
 		res.Message = m
 	}
 	res.Data = dataList
-	m.Status = strconv.Itoa(http.StatusOK)
 	m.Count = len(res.Data)
 	res.Message = m
 
@@ -122,9 +118,9 @@ func errorLogs(errors []error, rootCause string, status int) []models.ErrorLog {
 	for _, err := range errors {
 		log.Errorf("%v: %v", rootCause, err.Error())
 		errLogs = append(errLogs, models.ErrorLog{
-			RootCause: rootCause,
-			Status:    strconv.Itoa(status),
-			Trace:     err.Error(),
+			RootCause:  rootCause,
+			StatusCode: strconv.Itoa(status),
+			Trace:      err.Error(),
 		})
 	}
 	return errLogs

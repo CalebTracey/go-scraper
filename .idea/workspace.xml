@@ -4,12 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="29a3cc24-e94f-4ff8-ba36-f6c18daa5079" name="Changes" comment="moved geolocation facade logic to helper func">
-      <change afterPath="$PROJECT_DIR$/internal/facade/facade_test.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/services/scrape/constants.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/services/scrape/service_test.go" afterDir="false" />
+    <list default="true" id="29a3cc24-e94f-4ff8-ba36-f6c18daa5079" name="Changes" comment="moved constants in service package + added mocks and facade unit test happy path">
+      <change afterPath="$PROJECT_DIR$/internal/routes/handler_test.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/services/scrape/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/services/scrape/service.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/svr/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/svr/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/facade/facade.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/facade/facade.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/models/response.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/models/response.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/routes/handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/routes/handler.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,7 +104,7 @@
       <recent name="$PROJECT_DIR$/internal" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Test.TestService_GetData in github.com/calebtracey/go-scraper/internal/facade">
+  <component name="RunManager" selected="Go Test.go test go-scraper">
     <configuration name="go build main.go" type="GoApplicationRunConfiguration" factoryName="Go Application" nameIsGenerated="true">
       <module name="go-scraper" />
       <working_directory value="$PROJECT_DIR$/cmd/svr" />
@@ -123,6 +124,18 @@
       <filePath value="$PROJECT_DIR$/cmd/svr/main.go" />
       <method v="2" />
     </configuration>
+    <configuration name="TestHandler_Scrape in github.com/calebtracey/go-scraper/internal/routes" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="go-scraper" />
+      <working_directory value="$PROJECT_DIR$/internal/routes" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="github.com/calebtracey/go-scraper/internal/routes" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestHandler_Scrape\E$" />
+      <method v="2" />
+    </configuration>
     <configuration name="TestService_GetData in github.com/calebtracey/go-scraper/internal/facade" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="go-scraper" />
       <working_directory value="$PROJECT_DIR$/internal/facade" />
@@ -133,6 +146,16 @@
       <filePath value="$PROJECT_DIR$" />
       <framework value="gotest" />
       <pattern value="^\QTestService_GetData\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go test go-scraper" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="go-scraper" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="DIRECTORY" />
+      <package value="github.com/calebtracey/go-scraper" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
       <method v="2" />
     </configuration>
     <configuration name="Dockerfile" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
@@ -155,10 +178,14 @@
       <item itemvalue="Docker.Dockerfile" />
       <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
       <item itemvalue="Go Build.go build main.go" />
+      <item itemvalue="Go Test.TestHandler_Scrape in github.com/calebtracey/go-scraper/internal/routes" />
       <item itemvalue="Go Test.TestService_GetData in github.com/calebtracey/go-scraper/internal/facade" />
+      <item itemvalue="Go Test.go test go-scraper" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Test.go test go-scraper" />
+        <item itemvalue="Go Test.TestHandler_Scrape in github.com/calebtracey/go-scraper/internal/routes" />
         <item itemvalue="Go Test.TestService_GetData in github.com/calebtracey/go-scraper/internal/facade" />
         <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
         <item itemvalue="Docker.Dockerfile" />
@@ -176,7 +203,7 @@
       <workItem from="1665764171860" duration="33238000" />
       <workItem from="1665798905701" duration="8575000" />
       <workItem from="1665941591611" duration="3973000" />
-      <workItem from="1665953959493" duration="3080000" />
+      <workItem from="1665953959493" duration="5733000" />
     </task>
     <task id="LOCAL-00001" summary="Added additional colly config + docker">
       <created>1665790488709</created>
@@ -262,7 +289,14 @@
       <option name="project" value="LOCAL" />
       <updated>1665954289126</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="moved constants in service package + added mocks and facade unit test happy path">
+      <created>1666037254089</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1666037254089</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -305,7 +339,8 @@
     <MESSAGE value="added docs + updates for README.md" />
     <MESSAGE value="Added mocks + sort request field" />
     <MESSAGE value="moved geolocation facade logic to helper func" />
-    <option name="LAST_COMMIT_MESSAGE" value="moved geolocation facade logic to helper func" />
+    <MESSAGE value="moved constants in service package + added mocks and facade unit test happy path" />
+    <option name="LAST_COMMIT_MESSAGE" value="moved constants in service package + added mocks and facade unit test happy path" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>

@@ -65,7 +65,6 @@ func TestService_GetData(t *testing.T) {
 				},
 				Message: models.Message{
 					ErrorLog: nil,
-					Status:   "200",
 					Count:    1,
 				},
 			},
