@@ -14,7 +14,7 @@ type Message struct {
 }
 
 type ErrorLog struct {
-	Status    string `json:"status,omitempty"`
-	Trace     string `json:"trace,omitempty"`
-	RootCause string `json:"rootCause,omitempty"`
+	StatusCode string `json:"status,omitempty"`
+	Trace      string `json:"trace,omitempty"`
+	RootCause  string `json:"rootCause,omitempty"`
 }

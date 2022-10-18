@@ -1,36 +1,10 @@
 package scrape
 
 import (
+	"encoding/json"
 	"github.com/calebtracey/go-scraper/internal/models"
 	"github.com/gocolly/colly"
-)
-
-// yellowpages elements
-const (
-	ypInfoSection     = "div.info-section"
-	ypBusinessName    = "a.business-name"
-	ypBusinessRating  = "span.bbb-rating"
-	ypBadges          = "div.badges"
-	ypYearsInBusiness = "div.years-in-business"
-	ypPhones          = "div.phones"
-	ypAddress         = "div.adr"
-	ypStreetAddress   = "div.street-address"
-	ypLocality        = "div.locality"
-	ypLinks           = "div.links"
-	ypResultSite      = "a.track-visit-website"
-
-	ypAverageRating = "&&s=average_rating"
-)
-
-// sorting fields
-const (
-	ReqSortResultsByName     = "name"
-	ReqSortResultsByDistance = "distance"
-	ReqSortResultsByRating   = "rating"
-
-	sortResultsByName     = "&s=name"
-	sortResultsByDistance = "&s=distance"
-	sortResultsByRating   = "&s=average_rating"
+	log "github.com/sirupsen/logrus"
 )
 
 //go:generate mockgen -destination=mockService.go -package=scrape . ServiceI
@@ -57,12 +31,21 @@ func InitializeService(config *Config) (*Service, error) {
 
 func (s *Service) ScrapeCommonData(scrapeUrl string) (dataList []models.Data, errs []error) {
 	s.Collector.OnHTML("div.v-card", func(h *colly.HTMLElement) {
+		var taRating models.TARating
 		info := h.DOM
+		ta := info.Find(ypInfoSection).Find("div.ratings").AttrOr("data-tripadvisor", "")
+		if ta != "" {
+			err := json.Unmarshal([]byte(ta), &taRating)
+			if err != nil {
+				log.Error(err.Error())
+			}
+		}
 		data := models.Data{
 			Name: info.Find(ypInfoSection).Find(ypBusinessName).Text(),
 			Ratings: models.Ratings{
-				BBBRating: info.Find(ypInfoSection).Find(ypBusinessRating).Text(),
-				//TARatingURL: h.Request.AbsoluteURL(h.ChildAttr("a.ta-rating-wrapper", "href")),
+				TARating:    taRating,
+				BBBRating:   info.Find(ypInfoSection).Find(ypBusinessRating).Text(),
+				TARatingURL: h.Request.AbsoluteURL(h.ChildAttr("a.ta-rating-wrapper", "href")),
 			},
 			YearsInBusiness: info.Find(ypInfoSection).Find(ypBadges).Find(ypYearsInBusiness).Find("div.number").Text(),
 			Phone:           info.Find(ypInfoSection).Find(ypPhones).Text(),

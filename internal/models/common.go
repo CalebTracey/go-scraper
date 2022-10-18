@@ -3,7 +3,7 @@ package models
 type Data struct {
 	Name            string   `json:"name,omitempty"`
 	Categories      []string `json:"categories,omitempty"`
-	Ratings         Ratings
+	Ratings         Ratings  `json:"ratings,omitempty"`
 	YearsInBusiness string   `json:"years_in_business,omitempty"`
 	Phone           string   `json:"phone,omitempty"`
 	StreetAddress   string   `json:"street_address,omitempty"`
@@ -14,8 +14,14 @@ type Data struct {
 }
 
 type Ratings struct {
-	BBBRating   string `json:"bbb_rating,omitempty"`
-	TARatingURL string `json:"ta_rating_url,omitempty"`
+	TARating    TARating `json:"ta_rating,omitempty"`
+	BBBRating   string   `json:"bbb_rating,omitempty"`
+	TARatingURL string   `json:"ta_rating_url,omitempty"`
+}
+
+type TARating struct {
+	Rating string `json:"rating,omitempty"`
+	Count  string `json:"count,omitempty"`
 }
 
 type Location struct {

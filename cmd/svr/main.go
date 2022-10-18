@@ -6,6 +6,7 @@ import (
 	"github.com/calebtracey/go-scraper/internal/facade"
 	"github.com/calebtracey/go-scraper/internal/routes"
 	"github.com/calebtracey/go-scraper/internal/services"
+	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
 	"github.com/rs/cors"
 	log "github.com/sirupsen/logrus"
@@ -32,8 +33,8 @@ func main() {
 	handler := routes.Handler{
 		Service: service,
 	}
-
-	router := handler.InitializeRoutes()
+	router := mux.NewRouter().StrictSlash(true)
+	handler.InitializeRoutes(router)
 	c := cors.New(cors.Options{
 		AllowedOrigins:   []string{"http://localhost:3000"},
 		AllowCredentials: true,
