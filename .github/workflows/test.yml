@@ -1,18 +1,27 @@
 on: [push, pull_request]
 name: Test
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  test:
+    strategy:
+      matrix:
+        go-version: 1.19.x
+        os: ubuntu-latest
+      runs-on: ${{ matrix.os }}
     steps:
-    - uses: actions/checkout@v3
-
-    - name: Set up Go
-      uses: actions/setup-go@v3
+      - uses: actions/setup-go@v3
+        with:
+          go-version: ${{ matrix.go-version }}
+      - uses: actions/checkout@v3
+      - run: go test ./...
+  build:
+  strategy:
+    matrix:
+      go-version: 1.19.x
+      os: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+  steps:
+    - uses: actions/setup-go@v3
       with:
-        go-version: 1.18
-
-    - name: Build
-      run: go build -v ./...
-
-    - name: Test
-      run: go test -v ./...
+        go-version: ${{ matrix.go-version }}
+    - uses: actions/checkout@v3
+    - run: go build ./...

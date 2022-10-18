@@ -4,12 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="29a3cc24-e94f-4ff8-ba36-f6c18daa5079" name="Changes" comment="added handler unit test + handler code improvements for decoding and setting response status">
-      <change afterPath="$PROJECT_DIR$/internal/facade/algo/service.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/facade/algo/service_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/models/common.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/models/common.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/services/scrape/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/services/scrape/service.go" afterDir="false" />
+    <list default="true" id="29a3cc24-e94f-4ff8-ba36-f6c18daa5079" name="Changes" comment="updated github workflows test file">
+      <change beforePath="$PROJECT_DIR$/.github/workflows/test.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/test.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +27,7 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitToolBoxStore">
     <option name="projectConfigVersion" value="5" />
@@ -306,7 +303,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666039990255</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="updated github workflows test file">
+      <created>1666053133428</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1666053133428</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -351,7 +355,8 @@
     <MESSAGE value="moved geolocation facade logic to helper func" />
     <MESSAGE value="moved constants in service package + added mocks and facade unit test happy path" />
     <MESSAGE value="added handler unit test + handler code improvements for decoding and setting response status" />
-    <option name="LAST_COMMIT_MESSAGE" value="added handler unit test + handler code improvements for decoding and setting response status" />
+    <MESSAGE value="updated github workflows test file" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated github workflows test file" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
@@ -369,6 +374,6 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/go_scraper$TestService_GetData_in_github_com_calebtracey_go_scraper_internal_facade.out" NAME="TestService_GetData in github.com/calebtracey/go-scraper/internal/facade Coverage Results" MODIFIED="1665963221589" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/go_scraper$go_test_go_scraper.out" NAME="go test go-scraper Coverage Results" MODIFIED="1666039923724" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/go_scraper$go_test_go_scraper.out" NAME="go test go-scraper Coverage Results" MODIFIED="1666051445622" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
