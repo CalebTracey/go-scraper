@@ -5,7 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="29a3cc24-e94f-4ff8-ba36-f6c18daa5079" name="Changes" comment="updated github workflows test file">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/test.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/test.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/facade/facade.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/facade/facade.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/facade/facade_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/facade/facade_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/routes/handler_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/routes/handler_test.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,7 +103,7 @@
       <recent name="$PROJECT_DIR$/internal/services" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Test.Test_balanceUserRatings in github.com/calebtracey/go-scraper/internal/facade/algo">
+  <component name="RunManager" selected="Go Test.go test go-scraper">
     <configuration name="go build main.go" type="GoApplicationRunConfiguration" factoryName="Go Application" nameIsGenerated="true">
       <module name="go-scraper" />
       <working_directory value="$PROJECT_DIR$/cmd/svr" />
@@ -144,6 +147,18 @@
       <pattern value="^\QTestService_GetData\E$" />
       <method v="2" />
     </configuration>
+    <configuration name="TestService_GetData/Sad_Path:_Validation_error in github.com/calebtracey/go-scraper/internal/facade" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="go-scraper" />
+      <working_directory value="$PROJECT_DIR$/internal/facade" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="github.com/calebtracey/go-scraper/internal/facade" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestService_GetData\E$/^\QSad_Path:_Validation_error\E$" />
+      <method v="2" />
+    </configuration>
     <configuration name="Test_balanceUserRatings in github.com/calebtracey/go-scraper/internal/facade/algo" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="go-scraper" />
       <working_directory value="$PROJECT_DIR$/internal/facade/algo" />
@@ -166,17 +181,9 @@
       <framework value="gotest" />
       <method v="2" />
     </configuration>
-    <configuration name="docker-compose.yml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
-      <deployment type="docker-compose.yml">
-        <settings>
-          <option name="sourceFilePath" value="docker-compose.yml" />
-        </settings>
-      </deployment>
-      <method v="2" />
-    </configuration>
     <list>
-      <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
       <item itemvalue="Go Build.go build main.go" />
+      <item itemvalue="Go Test.TestService_GetData/Sad_Path:_Validation_error in github.com/calebtracey/go-scraper/internal/facade" />
       <item itemvalue="Go Test.TestHandler_Scrape in github.com/calebtracey/go-scraper/internal/routes" />
       <item itemvalue="Go Test.TestService_GetData in github.com/calebtracey/go-scraper/internal/facade" />
       <item itemvalue="Go Test.Test_balanceUserRatings in github.com/calebtracey/go-scraper/internal/facade/algo" />
@@ -184,11 +191,11 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Go Test.Test_balanceUserRatings in github.com/calebtracey/go-scraper/internal/facade/algo" />
         <item itemvalue="Go Test.go test go-scraper" />
+        <item itemvalue="Go Test.TestService_GetData/Sad_Path:_Validation_error in github.com/calebtracey/go-scraper/internal/facade" />
+        <item itemvalue="Go Test.Test_balanceUserRatings in github.com/calebtracey/go-scraper/internal/facade/algo" />
         <item itemvalue="Go Test.TestHandler_Scrape in github.com/calebtracey/go-scraper/internal/routes" />
         <item itemvalue="Go Test.TestService_GetData in github.com/calebtracey/go-scraper/internal/facade" />
-        <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
       </list>
     </recent_temporary>
   </component>
@@ -204,6 +211,8 @@
       <workItem from="1665798905701" duration="8575000" />
       <workItem from="1665941591611" duration="3973000" />
       <workItem from="1665953959493" duration="8920000" />
+      <workItem from="1666748671813" duration="243000" />
+      <workItem from="1666748929081" duration="619000" />
     </task>
     <task id="LOCAL-00001" summary="Added additional colly config + docker">
       <created>1665790488709</created>
@@ -310,7 +319,21 @@
       <option name="project" value="LOCAL" />
       <updated>1666053133428</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="updated github workflows test file">
+      <created>1666053474855</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1666053474855</updated>
+    </task>
+    <task id="LOCAL-00017" summary="updated github workflows test file">
+      <created>1666053587719</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1666053587719</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -374,6 +397,6 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/go_scraper$TestService_GetData_in_github_com_calebtracey_go_scraper_internal_facade.out" NAME="TestService_GetData in github.com/calebtracey/go-scraper/internal/facade Coverage Results" MODIFIED="1665963221589" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/go_scraper$go_test_go_scraper.out" NAME="go test go-scraper Coverage Results" MODIFIED="1666051445622" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/go_scraper$go_test_go_scraper.out" NAME="go test go-scraper Coverage Results" MODIFIED="1666749419332" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
