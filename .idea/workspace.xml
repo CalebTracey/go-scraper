@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="29a3cc24-e94f-4ff8-ba36-f6c18daa5079" name="Changes" comment="updated github workflows test file">
+    <list default="true" id="29a3cc24-e94f-4ff8-ba36-f6c18daa5079" name="Changes" comment="added unit tests">
+      <change beforePath="$PROJECT_DIR$/.github/workflows/build.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/build.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/workflows/test.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/test.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/facade/facade.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/facade/facade.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/facade/facade_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/facade/facade_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/internal/routes/handler_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/routes/handler_test.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -135,18 +134,6 @@
       <pattern value="^\QTestHandler_Scrape\E$" />
       <method v="2" />
     </configuration>
-    <configuration name="TestService_GetData in github.com/calebtracey/go-scraper/internal/facade" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
-      <module name="go-scraper" />
-      <working_directory value="$PROJECT_DIR$/internal/facade" />
-      <root_directory value="$PROJECT_DIR$" />
-      <kind value="PACKAGE" />
-      <package value="github.com/calebtracey/go-scraper/internal/facade" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$" />
-      <framework value="gotest" />
-      <pattern value="^\QTestService_GetData\E$" />
-      <method v="2" />
-    </configuration>
     <configuration name="TestService_GetData/Sad_Path:_Validation_error in github.com/calebtracey/go-scraper/internal/facade" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="go-scraper" />
       <working_directory value="$PROJECT_DIR$/internal/facade" />
@@ -171,6 +158,18 @@
       <pattern value="^\QTest_balanceUserRatings\E$" />
       <method v="2" />
     </configuration>
+    <configuration name="Test_getResponseStatus/206_error in github.com/calebtracey/go-scraper/internal/routes" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="go-scraper" />
+      <working_directory value="$PROJECT_DIR$/internal/routes" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="github.com/calebtracey/go-scraper/internal/routes" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTest_getResponseStatus\E$/^\Q206_error\E$" />
+      <method v="2" />
+    </configuration>
     <configuration name="go test go-scraper" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="go-scraper" />
       <working_directory value="$PROJECT_DIR$" />
@@ -184,18 +183,18 @@
     <list>
       <item itemvalue="Go Build.go build main.go" />
       <item itemvalue="Go Test.TestService_GetData/Sad_Path:_Validation_error in github.com/calebtracey/go-scraper/internal/facade" />
+      <item itemvalue="Go Test.Test_getResponseStatus/206_error in github.com/calebtracey/go-scraper/internal/routes" />
       <item itemvalue="Go Test.TestHandler_Scrape in github.com/calebtracey/go-scraper/internal/routes" />
-      <item itemvalue="Go Test.TestService_GetData in github.com/calebtracey/go-scraper/internal/facade" />
       <item itemvalue="Go Test.Test_balanceUserRatings in github.com/calebtracey/go-scraper/internal/facade/algo" />
       <item itemvalue="Go Test.go test go-scraper" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Go Test.go test go-scraper" />
+        <item itemvalue="Go Test.Test_getResponseStatus/206_error in github.com/calebtracey/go-scraper/internal/routes" />
         <item itemvalue="Go Test.TestService_GetData/Sad_Path:_Validation_error in github.com/calebtracey/go-scraper/internal/facade" />
         <item itemvalue="Go Test.Test_balanceUserRatings in github.com/calebtracey/go-scraper/internal/facade/algo" />
         <item itemvalue="Go Test.TestHandler_Scrape in github.com/calebtracey/go-scraper/internal/routes" />
-        <item itemvalue="Go Test.TestService_GetData in github.com/calebtracey/go-scraper/internal/facade" />
       </list>
     </recent_temporary>
   </component>
@@ -212,7 +211,7 @@
       <workItem from="1665941591611" duration="3973000" />
       <workItem from="1665953959493" duration="8920000" />
       <workItem from="1666748671813" duration="243000" />
-      <workItem from="1666748929081" duration="619000" />
+      <workItem from="1666748929081" duration="1174000" />
     </task>
     <task id="LOCAL-00001" summary="Added additional colly config + docker">
       <created>1665790488709</created>
@@ -333,7 +332,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666053587719</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="added unit tests">
+      <created>1666750001952</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1666750001952</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -379,7 +385,8 @@
     <MESSAGE value="moved constants in service package + added mocks and facade unit test happy path" />
     <MESSAGE value="added handler unit test + handler code improvements for decoding and setting response status" />
     <MESSAGE value="updated github workflows test file" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated github workflows test file" />
+    <MESSAGE value="added unit tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="added unit tests" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
@@ -397,6 +404,6 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/go_scraper$TestService_GetData_in_github_com_calebtracey_go_scraper_internal_facade.out" NAME="TestService_GetData in github.com/calebtracey/go-scraper/internal/facade Coverage Results" MODIFIED="1665963221589" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/go_scraper$go_test_go_scraper.out" NAME="go test go-scraper Coverage Results" MODIFIED="1666749419332" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/go_scraper$go_test_go_scraper.out" NAME="go test go-scraper Coverage Results" MODIFIED="1666749937541" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="GoCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
