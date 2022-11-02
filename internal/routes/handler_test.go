@@ -87,3 +87,132 @@ func TestHandler_Scrape(t *testing.T) {
 		})
 	}
 }
+
+func Test_getResponseStatus(t *testing.T) {
+	type args struct {
+		errs            []models.ErrorLog
+		lengthOfResults int
+	}
+	tests := []struct {
+		name       string
+		args       args
+		wantMsg    string
+		wantStatus int
+	}{
+		{
+			name: "206 error",
+			args: args{
+				errs: []models.ErrorLog{
+					{
+						StatusCode: "206",
+					},
+				},
+				lengthOfResults: 0,
+			},
+			wantMsg:    "ERROR",
+			wantStatus: 206,
+		},
+		{
+			name: "206 error - 404 with results",
+			args: args{
+				errs: []models.ErrorLog{
+					{
+						StatusCode: "404",
+					},
+				},
+				lengthOfResults: 1,
+			},
+			wantMsg:    "ERROR",
+			wantStatus: 206,
+		},
+		{
+			name: "404 error",
+			args: args{
+				errs: []models.ErrorLog{
+					{
+						StatusCode: "404",
+					},
+				},
+				lengthOfResults: 0,
+			},
+			wantMsg:    "ERROR",
+			wantStatus: 404,
+		},
+		{
+			name: "206 error - 400 with results",
+			args: args{
+				errs: []models.ErrorLog{
+					{
+						StatusCode: "400",
+					},
+				},
+				lengthOfResults: 1,
+			},
+			wantMsg:    "ERROR",
+			wantStatus: 206,
+		},
+		{
+			name: "400 error",
+			args: args{
+				errs: []models.ErrorLog{
+					{
+						StatusCode: "400",
+					},
+				},
+				lengthOfResults: 0,
+			},
+			wantMsg:    "ERROR",
+			wantStatus: 400,
+		},
+		{
+			name: "206 error - 500 with results",
+			args: args{
+				errs: []models.ErrorLog{
+					{
+						StatusCode: "500",
+					},
+				},
+				lengthOfResults: 1,
+			},
+			wantMsg:    "ERROR",
+			wantStatus: 206,
+		},
+		{
+			name: "500 error",
+			args: args{
+				errs: []models.ErrorLog{
+					{
+						StatusCode: "500",
+					},
+				},
+				lengthOfResults: 0,
+			},
+			wantMsg:    "ERROR",
+			wantStatus: 500,
+		},
+		{
+			name: "Default error",
+			args: args{
+				errs: []models.ErrorLog{
+					{
+						StatusCode: "",
+					},
+				},
+				lengthOfResults: 0,
+			},
+			wantMsg:    "ERROR",
+			wantStatus: 500,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			gotMsg, gotStatus := getResponseStatus(tt.args.errs, tt.args.lengthOfResults)
+			if gotMsg != tt.wantMsg {
+				t.Errorf("getResponseStatus() gotMsg = %v, want %v", gotMsg, tt.wantMsg)
+			}
+			if gotStatus != tt.wantStatus {
+				t.Errorf("getResponseStatus() gotStatus = %v, want %v", gotStatus, tt.wantStatus)
+			}
+		})
+	}
+}

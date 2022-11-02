@@ -1,4 +1,7 @@
 # go-scraper
+![build](https://github.com/CalebTracey/go-scraper/actions/workflows/build.yml/badge.svg)
+![test](https://github.com/CalebTracey/go-scraper/actions/workflows/test.yml/badge.svg)
+
 
 Web scraper written in Go. Intended to collect business data based on location.
 
