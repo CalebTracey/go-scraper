@@ -25,16 +25,15 @@ func TestService_GetData(t *testing.T) {
 		req models.ScrapeRequest
 	}
 	tests := []struct {
-		name                string
-		fields              fields
-		args                args
-		wantRes             models.ScrapeResponse
-		mockAddress         string
-		mockScrapeRes       []models.Data
-		mockScrapeErrs      []error
-		mockGeocodeRes      models.Location
-		mockGeocodeErr      error
-		expectValidationErr bool
+		name           string
+		fields         fields
+		args           args
+		wantRes        models.ScrapeResponse
+		mockAddress    string
+		mockScrapeRes  []models.Data
+		mockScrapeErrs []error
+		mockGeocodeRes models.Location
+		mockGeocodeErr error
 	}{
 		{
 			name: "Happy Path",
@@ -82,51 +81,8 @@ func TestService_GetData(t *testing.T) {
 				Lat: 123,
 				Lng: 321,
 			},
-			mockScrapeErrs:      nil,
-			mockGeocodeErr:      nil,
-			expectValidationErr: false,
-		},
-		{
-			name: "Sad Path: Validation error",
-			fields: fields{
-				ScrapeService:  mockScrapeService,
-				GeocodeService: mockGeocodeService,
-			},
-			args: args{
-				ctx: context.Background(),
-				req: models.ScrapeRequest{
-					Terms: "",
-					City:  "",
-					State: "",
-					Sort:  "rating",
-				},
-			},
-			wantRes: models.ScrapeResponse{
-				Data: nil,
-				Message: models.Message{
-					ErrorLog: []models.ErrorLog{
-						{
-							"400",
-							"search terms required",
-							"Request error",
-						},
-						{
-							"400",
-							"city required",
-							"Request error",
-						},
-						{
-							"400",
-							"state required",
-							"Request error",
-						},
-					},
-					Count: 0,
-				},
-			},
-			mockScrapeErrs:      nil,
-			mockGeocodeErr:      nil,
-			expectValidationErr: true,
+			mockScrapeErrs: nil,
+			mockGeocodeErr: nil,
 		},
 	}
 	for _, tt := range tests {
@@ -136,10 +92,9 @@ func TestService_GetData(t *testing.T) {
 				GeocodeService: tt.fields.GeocodeService,
 			}
 			scrapeUrl := scrape.BuildScrapeUrl(tt.args.req)
-			if !tt.expectValidationErr {
-				mockScrapeService.EXPECT().ScrapeCommonData(scrapeUrl).Return(tt.mockScrapeRes, tt.mockScrapeErrs)
-				mockGeocodeService.EXPECT().GeocodeLocationAddress(tt.args.ctx, tt.mockAddress).Return(tt.mockGeocodeRes, tt.mockGeocodeErr)
-			}
+			mockScrapeService.EXPECT().ScrapeCommonData(scrapeUrl).Return(tt.mockScrapeRes, tt.mockScrapeErrs)
+			mockGeocodeService.EXPECT().GeocodeLocationAddress(tt.args.ctx, tt.mockAddress).Return(tt.mockGeocodeRes, tt.mockGeocodeErr)
+
 			if gotRes := s.GetData(tt.args.ctx, tt.args.req); !reflect.DeepEqual(gotRes, tt.wantRes) {
 				t.Errorf("GetData() = %v, want %v", gotRes, tt.wantRes)
 			}

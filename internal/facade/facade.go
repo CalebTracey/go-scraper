@@ -50,6 +50,9 @@ func (s *Service) GetData(ctx context.Context, req models.ScrapeRequest) (res mo
 		res.Message = m
 		return res
 	}
+	if req.Sort != "" {
+
+	}
 	scrapeUrl := scrape.BuildScrapeUrl(req)
 	dataList, scrapeErrs := s.ScrapeService.ScrapeCommonData(scrapeUrl)
 	if len(errs) > 0 {

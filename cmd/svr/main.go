@@ -20,16 +20,12 @@ const Port = "6080"
 
 func main() {
 	defer panicQuit()
-	err := godotenv.Load()
-	if err != nil {
-		log.Panicln(err)
-	}
+	log.Fatal(godotenv.Load())
 	appConfig := config.NewFromFile(configPath)
 	service, err := facade.NewService(appConfig)
 	if err != nil {
 		log.Panicln(err)
 	}
-
 	handler := routes.Handler{
 		Service: service,
 	}
