@@ -32,7 +32,7 @@ func InitializeService(config *config.Config) (*Service, error) {
 	}, nil
 }
 
-func (s Service) GeocodeLocationAddress(ctx context.Context, address string) (loc models.Location, err error) {
+func (s *Service) GeocodeLocationAddress(ctx context.Context, address string) (loc models.Location, err error) {
 	r := &maps.GeocodingRequest{
 		Address: address,
 	}

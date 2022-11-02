@@ -9,7 +9,7 @@ const (
 	defaultW = 10
 )
 
-// balanceUserRatings algorithm inspired by Bayesian probability to balance
+// balanceUserRatings algorithm similar to Bayesian probability to balance
 // the number of ratings versus the ratings themselves.
 func balanceUserRatings(rating float64, count int) string {
 	top := (defaultW * defaultR) + (float64(count) * rating)
